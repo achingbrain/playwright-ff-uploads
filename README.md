@@ -13,7 +13,7 @@ The test passes in Chrome, fails in Firefox but the same code works as expected 
 ## Setup
 
 ```console
-$ git clone git@github.com:achingbrain/playwright-ff-uploads.git
+$ git clone https://github.com/achingbrain/playwright-ff-uploads.git
 $ cd playwright-ff-uploads
 $ npm i
 ```
