@@ -16,11 +16,13 @@ This repo contains a node server in [index.js](./index.js) that accepts a multip
 
 It also contains [test.js](./test.js) that runs using Playwright and creates a multipart request, appends a `Blob` created from a `Uint8Array` of zeros, uploads it and inspects the response to see if the right number of bytes were received.
 
+It repeats this process ten times as sometimes it will work in FF and sometimes it will not.
+
+Change `DATA_SIZE` in [test.js](./test.js) to something small like `10` and it works in FF but larger values like `Math.pow(2, 20)` do not.
+
 Finally it has [client/index.html](./client/index.html) which performs the same operation but outside of any testing framework or extra code.
 
-The uploads work in Playwright/Chrome, fails in Playwright/Firefox but the same code works as expected if run in Firefox without any extra code.
-
-Change `DATA_SIZE` in `test.js` to something small like `10` and it works - `Math.pow(2, 20)` does not.
+The uploads work in Playwright/Chrome, fail in Playwright/Firefox but the same code works as expected if run in Firefox without any extra code.
 
 ## To replicate:
 
