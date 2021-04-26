@@ -14,7 +14,7 @@ async function main () {
   for (let i = 0; i < 10; i++) {
     const body = new FormData()
     body.set('file', new Blob([
-      Uint8Array.from(new Array(DATA_SIZE).fill(0))
+      new Uint8Array(DATA_SIZE)
     ]))
 
     const res = await fetch('http://127.0.0.1:4893', {

@@ -9,12 +9,10 @@ async function main () {
     await page.goto('http://127.0.0.1:4893')
 
     for (let i = 0; i < 10; i++) {
-      const uploaded = await page.evaluate(async () => {
-        const DATA_SIZE = Math.pow(2, 20)
-
+      const uploaded = await page.evaluate(async (size) => {
         const body = new FormData()
         body.set('file', new Blob([
-          Uint8Array.from(new Array(DATA_SIZE).fill(0))
+          new Uint8Array(size)
         ]))
 
         const res = await fetch('http://127.0.0.1:4893', {
@@ -23,7 +21,7 @@ async function main () {
         })
 
         return parseInt(await res.text())
-      })
+      }, DATA_SIZE)
 
       if (uploaded !== DATA_SIZE) {
         throw new Error(`${browserType} ${i} not ok - uploaded ${uploaded} expected ${DATA_SIZE}`)
