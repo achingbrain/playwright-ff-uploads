@@ -9,7 +9,6 @@ const POST = 4893
 // number back to the client
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.writeHead(200)
 
   if (req.method === 'POST') {
     const form = formidable()
@@ -21,10 +20,14 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
+      console.info('uploaded', files.file.size)
+
+      res.writeHead(200)
       res.end(`${files.file.size}`)
     })
   } else {
-    res.end(`POST only pls`)
+    res.writeHead(200)
+    res.end(`<!DOCTYPE html><html><meta charset="utf-8"><head><title>uploads</title></head><body>Hello</body></html>`)
   }
 })
 server.listen(POST, () => {

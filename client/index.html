@@ -8,15 +8,14 @@
     <script>
 
 const ONE_MEG = Math.pow(2, 20)
+const log = document.getElementById('log')
 
 async function main () {
   for (let i = 0; i < 10; i++) {
-    console.info('attempt', i)
-
-    const data = Uint8Array.from(new Array(ONE_MEG).fill(0))
-
     const body = new FormData()
-    body.set('file', new Blob([data]))
+    body.set('file', new Blob([
+      Uint8Array.from(new Array(ONE_MEG).fill(0))
+    ]))
 
     const res = await fetch('http://127.0.0.1:4893', {
       method: 'POST',
@@ -28,11 +27,13 @@ async function main () {
     if (read !== ONE_MEG) {
       throw new Error(`Data size mismatch - sent ${ONE_MEG}, server counted ${read} bytes\n`)
     }
+
+    log.innerHTML += `attempt ${i} ok<br/>`
   }
 }
 
 main().catch(err => {
-  console.error(err)
+  log.innerHTML += `${err}<br/>`
 })
 
     </script>
