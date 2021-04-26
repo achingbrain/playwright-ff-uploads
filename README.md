@@ -22,13 +22,13 @@ $ npm i
 
 1. Start the echo server:
 
-```
+```console
 $ npm run start:server
 ```
 
 2. Run the test under chrome (start the echo server first):
 
-```
+```console
 $ npm run test:chromium
 
 > playwright-ff-uploads@1.0.0 test:chromium
