@@ -7,14 +7,14 @@
     <pre id="log"></pre>
     <script>
 
-const ONE_MEG = Math.pow(2, 20)
-const log = document.getElementById('log')
+const DATA_SIZE = Math.pow(2, 20)
+const LOG = document.getElementById('log')
 
 async function main () {
   for (let i = 0; i < 10; i++) {
     const body = new FormData()
     body.set('file', new Blob([
-      Uint8Array.from(new Array(ONE_MEG).fill(0))
+      Uint8Array.from(new Array(DATA_SIZE).fill(0))
     ]))
 
     const res = await fetch('http://127.0.0.1:4893', {
@@ -24,16 +24,16 @@ async function main () {
 
     const read = parseInt(await res.text())
 
-    if (read !== ONE_MEG) {
-      throw new Error(`Data size mismatch - sent ${ONE_MEG}, server counted ${read} bytes\n`)
+    if (read !== DATA_SIZE) {
+      throw new Error(`Data size mismatch - sent ${DATA_SIZE}, server counted ${read} bytes\n`)
     }
 
-    log.innerHTML += `attempt ${i} ok<br/>`
+    LOG.innerHTML += `attempt ${i} ok<br/>`
   }
 }
 
 main().catch(err => {
-  log.innerHTML += `${err}<br/>`
+  LOG.innerHTML += `${err}<br/>`
 })
 
     </script>

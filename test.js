@@ -1,5 +1,5 @@
 const playwright = require('playwright')
-const ONE_MEG = Math.pow(2, 20)
+const DATA_SIZE = Math.pow(2, 20)
 
 async function main () {
   for (const browserType of ['chromium', 'firefox']) {
@@ -10,11 +10,11 @@ async function main () {
 
     for (let i = 0; i < 10; i++) {
       const uploaded = await page.evaluate(async () => {
-        const ONE_MEG = Math.pow(2, 20)
+        const DATA_SIZE = Math.pow(2, 20)
 
         const body = new FormData()
         body.set('file', new Blob([
-          Uint8Array.from(new Array(ONE_MEG).fill(0))
+          Uint8Array.from(new Array(DATA_SIZE).fill(0))
         ]))
 
         const res = await fetch('http://127.0.0.1:4893', {
@@ -25,8 +25,8 @@ async function main () {
         return parseInt(await res.text())
       })
 
-      if (uploaded !== ONE_MEG) {
-        throw new Error(`${browserType} ${i} not ok - uploaded ${uploaded} expected ${ONE_MEG}`)
+      if (uploaded !== DATA_SIZE) {
+        throw new Error(`${browserType} ${i} not ok - uploaded ${uploaded} expected ${DATA_SIZE}`)
       } else {
         console.info(browserType, i, 'ok')
       }
