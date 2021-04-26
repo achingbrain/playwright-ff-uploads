@@ -20,6 +20,8 @@ Finally it has [client/index.html](./client/index.html) which performs the same 
 
 The uploads work in Playwright/Chrome, fails in Playwright/Firefox but the same code works as expected if run in Firefox without any extra code.
 
+Change `DATA_SIZE` in `test.js` to something small like `10` and it works - `Math.pow(2, 20)` does not.
+
 ## To replicate:
 
 1. Start the echo server:
